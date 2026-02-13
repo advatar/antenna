@@ -19,6 +19,7 @@ rust/**/target/
 
 # Swift
 swift/**/.build/
+swift/**/.swiftpm/
 
 # Foundry
 contracts/out/
