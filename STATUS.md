@@ -4,4 +4,4 @@
 - [x] Rebrand protocol references from the legacy name to Antenna across docs and source code.
 - [x] Rename old-name package/module/schema paths to Antenna equivalents.
 - [x] Run validation checks and confirm no remaining old-name references.
-- [ ] Commit and push changes.
+- [x] Commit and push changes.
