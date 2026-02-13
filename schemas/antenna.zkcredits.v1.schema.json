@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:antenna:schema:zkcredits:v1",
+  "title": "Antenna ZK Credits v1 (Groth16/Bn254)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "contract",
+    "merkleRoot",
+    "ticketIndex",
+    "cMax",
+    "nullifier",
+    "verifierId",
+    "proof"
+  ],
+  "properties": {
+    "type": {
+      "const": "antenna.zkcredits.v1"
+    },
+    "contract": {
+      "type": "string",
+      "pattern": "^eip155:\\d+:0x[0-9a-fA-F]{40}$"
+    },
+    "merkleRoot": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$"
+    },
+    "ticketIndex": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "cMax": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "nullifier": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$"
+    },
+    "verifierId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "signal": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "string",
+          "pattern": "^0x[0-9a-fA-F]{1,64}$"
+        },
+        "y": {
+          "type": "string",
+          "pattern": "^0x[0-9a-fA-F]{1,64}$"
+        }
+      }
+    },
+    "refundTickets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "value",
+          "sig"
+        ],
+        "properties": {
+          "value": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "sig": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]+$"
+          }
+        }
+      }
+    },
+    "proof": {
+      "$ref": "#/$defs/groth16Proof"
+    }
+  },
+  "$defs": {
+    "field": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$"
+    },
+    "groth16Proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "curve",
+        "a",
+        "b",
+        "c",
+        "inputs"
+      ],
+      "properties": {
+        "system": {
+          "const": "groth16"
+        },
+        "curve": {
+          "const": "bn254"
+        },
+        "a": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/field"
+          }
+        },
+        "b": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "$ref": "#/$defs/field"
+            }
+          }
+        },
+        "c": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/field"
+          }
+        },
+        "inputs": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/$defs/field"
+          }
+        }
+      }
+    }
+  }
+}

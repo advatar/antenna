@@ -1,0 +1,15 @@
+{
+  "name": "eip191_sign_eventhash_bytes32",
+  "kind": "eip191",
+  "privateKey": "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "expectedSignerAddress": "0xfcad0b19bb29d4674531d6f115237e16afce377c",
+  "messageBytes32": "0x3722033095f71954949abc38c48f392a9d18644084078cb710a87c8890f3eb01",
+  "digestKeccak256": "0xcde0eb6d83bcdc11a1f869fdf383589a6b625ef4e6cd3a92dbbd63eefd966a69",
+  "signature": {
+    "r": "0x42ea349f034489b135d4140036cc5354edbaff851fd53e6941b64e38a42a7af6",
+    "s": "0x2ecd966895a7a9dff061987634d9c2a33cee31ede854f10cdf00fa460270761f",
+    "recid": 0,
+    "v": 27,
+    "signatureHex": "0x42ea349f034489b135d4140036cc5354edbaff851fd53e6941b64e38a42a7af62ecd966895a7a9dff061987634d9c2a33cee31ede854f10cdf00fa460270761f1b"
+  }
+}

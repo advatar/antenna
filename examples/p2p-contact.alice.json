@@ -1,0 +1,34 @@
+{
+  "type": "antenna.p2p-contact.v1",
+  "agent": {
+    "agentRegistry": "eip155:11155111:0x8004A818BFB912233c491871b3d84c89A494BD9e",
+    "agentId": 22,
+    "ens": "alice.antenna.eth"
+  },
+  "transports": [
+    {
+      "name": "webrtc",
+      "signal": [
+        {
+          "type": "relay",
+          "uri": "https://relay.example.invalid/signal"
+        }
+      ],
+      "notes": "Example signaling relay; replace with your own."
+    },
+    {
+      "name": "libp2p",
+      "addresses": [
+        "/dns4/p2p.example.invalid/tcp/443/wss/p2p/12D3KooWExamplePeerId"
+      ]
+    }
+  ],
+  "pubsub": {
+    "capabilities": [
+      "gossip",
+      "storeAndForward"
+    ],
+    "maxInboundBytes": 131072
+  },
+  "updatedAt": "2026-02-13T00:00:00Z"
+}

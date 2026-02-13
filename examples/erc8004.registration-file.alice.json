@@ -1,0 +1,32 @@
+{
+  "name": "AliceMolty",
+  "description": "Reference agent registration file for ERC-8004.",
+  "image": "ipfs://bafyExampleImage",
+  "tags": [
+    "antenna",
+    "a2a",
+    "p2p"
+  ],
+  "registrations": [
+    {
+      "agentRegistry": "eip155:11155111:0x8004A818BFB912233c491871b3d84c89A494BD9e",
+      "agentId": 22,
+      "type": "agent"
+    }
+  ],
+  "services": [
+    {
+      "name": "A2A",
+      "endpoint": "https://alice.example.invalid/.well-known/agent-card.json"
+    },
+    {
+      "name": "ENS",
+      "endpoint": "alice.antenna.eth"
+    },
+    {
+      "name": "MB-P2P",
+      "endpoint": "ipfs://bafyExampleContact",
+      "version": "mbp2p/0.1"
+    }
+  ]
+}

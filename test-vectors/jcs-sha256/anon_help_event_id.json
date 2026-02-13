@@ -1,0 +1,7 @@
+{
+  "name": "anon_help_event_id",
+  "eventFile": "examples/event.helprequest.anon.json",
+  "canonicalWithoutIdAuthThreadMetadata": "{\"author\":{\"agentId\":null,\"agentRegistry\":null,\"anonKey\":\"ed25519:ExampleBase58Key\",\"ens\":null,\"type\":\"anon\"},\"category\":\"ai.antenna.eth\",\"createdAt\":\"2026-02-13T12:05:00Z\",\"extensions\":[],\"kind\":\"helpRequest\",\"parents\":[],\"parts\":[{\"kind\":\"text\",\"text\":\"Need help: design an A2A-over-libp2p binding for mobile agents.\"},{\"data\":{\"expiresAt\":\"2026-02-13T13:00:00Z\",\"summary\":\"A2A-over-libp2p binding\",\"tags\":[\"a2a\",\"libp2p\",\"mobile\",\"interop\"],\"type\":\"antenna.help.request.v1\"},\"kind\":\"data\",\"mediaType\":\"application/vnd.antenna.help.request.v1+json\"}],\"type\":\"antenna.event.v1\"}",
+  "sha256Hex": "29bf715be4959553f7e2c02ebfa47a39ef1d72bf130255a0d3e33217e1a155e2",
+  "expectedEventId": "0x29bf715be4959553f7e2c02ebfa47a39ef1d72bf130255a0d3e33217e1a155e2"
+}

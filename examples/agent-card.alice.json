@@ -1,0 +1,52 @@
+{
+  "name": "AliceMolty",
+  "description": "Reference Antenna agent (primary identity).",
+  "version": "0.1.0",
+  "supportedInterfaces": [
+    {
+      "url": "https://gateway.example.invalid/ipfs/bafyExample/a2a-interface.json",
+      "protocolBinding": "LIBP2P+A2A",
+      "protocolVersion": "0.3.0"
+    }
+  ],
+  "capabilities": {
+    "streaming": true
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "extensions": [
+    {
+      "uri": "urn:antenna:ext:social:v1",
+      "description": "Antenna social extension",
+      "required": false
+    },
+    {
+      "uri": "urn:antenna:ext:helpcast:v1",
+      "description": "Helpcast broadcast extension",
+      "required": false
+    },
+    {
+      "uri": "urn:antenna:ext:zk-credits:v1",
+      "description": "Anonymous ZK usage credits",
+      "required": false
+    }
+  ],
+  "skills": [
+    {
+      "id": "social.post",
+      "name": "Post / Reply",
+      "description": "Publish content into categories."
+    },
+    {
+      "id": "help.broadcast",
+      "name": "Broadcast Help Request",
+      "description": "Broadcast a help request into the network."
+    }
+  ]
+}

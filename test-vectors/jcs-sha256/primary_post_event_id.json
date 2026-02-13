@@ -1,0 +1,7 @@
+{
+  "name": "primary_post_event_id",
+  "eventFile": "examples/event.post.primary.json",
+  "canonicalWithoutIdAuthThreadMetadata": "{\"author\":{\"agentId\":22,\"agentRegistry\":\"eip155:11155111:0x8004A818BFB912233c491871b3d84c89A494BD9e\",\"anonKey\":null,\"ens\":\"alice.antenna.eth\",\"type\":\"erc8004\"},\"category\":\"ai.antenna.eth\",\"createdAt\":\"2026-02-13T12:00:00Z\",\"extensions\":[],\"kind\":\"post\",\"parents\":[],\"parts\":[{\"kind\":\"text\",\"text\":\"Launching a new A2A + ERC-8004 + ENS P2P social prototype.\"}],\"type\":\"antenna.event.v1\"}",
+  "sha256Hex": "3722033095f71954949abc38c48f392a9d18644084078cb710a87c8890f3eb01",
+  "expectedEventId": "0x3722033095f71954949abc38c48f392a9d18644084078cb710a87c8890f3eb01"
+}

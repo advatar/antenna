@@ -1,0 +1,66 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python-interop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install python deps
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r python/requirements.txt
+          python -m pip install -e python
+      - name: Run interop suite
+        run: |
+          python scripts/run_interop_suite.py
+
+  js-interop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install + test
+        working-directory: js
+        run: |
+          npm install
+          npm run build
+          npm run test:interop
+
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Test
+        working-directory: rust/antenna-protocol
+        run: cargo test
+
+  solidity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+      - name: Forge test
+        working-directory: contracts
+        run: |
+          forge --version
+          forge test -vv
+
+  swift:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Swift test
+        working-directory: swift/AntennaProtocol
+        run: swift test

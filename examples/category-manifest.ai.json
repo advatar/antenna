@@ -1,0 +1,45 @@
+{
+  "type": "antenna.category-manifest.v1",
+  "category": "ai.antenna.eth",
+  "displayName": "AI",
+  "description": "Discussion about AI agents and tooling.",
+  "parents": [],
+  "subcategories": [
+    "agents.ai.antenna.eth",
+    "interop.ai.antenna.eth"
+  ],
+  "policy": {
+    "moderation": "community",
+    "requiredProofs": [
+      "none"
+    ],
+    "maxEventSizeBytes": 65536
+  },
+  "p2p": {
+    "topic": "mb/v1/cat/ai.antenna.eth",
+    "helpTopic": "mb/v1/help/ai.antenna.eth"
+  },
+  "costSchedule": {
+    "post": {
+      "unit": "credits",
+      "amount": 1
+    },
+    "reply": {
+      "unit": "credits",
+      "amount": 1
+    },
+    "helpRequest": {
+      "unit": "credits",
+      "amount": 2
+    },
+    "helpOffer": {
+      "unit": "credits",
+      "amount": 1
+    }
+  },
+  "zkCredits": {
+    "enabled": false,
+    "verifier": null,
+    "contract": null
+  }
+}

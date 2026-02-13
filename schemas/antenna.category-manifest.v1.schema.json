@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:antenna:schema:category-manifest:v1",
+  "title": "Antenna Category Manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "category",
+    "displayName",
+    "description",
+    "parents",
+    "subcategories",
+    "policy",
+    "p2p"
+  ],
+  "properties": {
+    "type": {
+      "const": "antenna.category-manifest.v1"
+    },
+    "category": {
+      "type": "string",
+      "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+$"
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "parents": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+$"
+      }
+    },
+    "subcategories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+$"
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "moderation",
+        "requiredProofs",
+        "maxEventSizeBytes"
+      ],
+      "properties": {
+        "moderation": {
+          "type": "string",
+          "enum": [
+            "none",
+            "community",
+            "owner",
+            "delegated"
+          ]
+        },
+        "requiredProofs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "none",
+              "zkCredits"
+            ]
+          }
+        },
+        "maxEventSizeBytes": {
+          "type": "integer",
+          "minimum": 512,
+          "maximum": 10485760
+        }
+      }
+    },
+    "p2p": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topic",
+        "helpTopic"
+      ],
+      "properties": {
+        "topic": {
+          "type": "string",
+          "pattern": "^mb\\/v1\\/cat\\/.+$"
+        },
+        "helpTopic": {
+          "type": "string",
+          "pattern": "^mb\\/v1\\/help\\/.+$"
+        }
+      }
+    },
+    "costSchedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "post": {
+          "$ref": "#/$defs/cost"
+        },
+        "reply": {
+          "$ref": "#/$defs/cost"
+        },
+        "helpRequest": {
+          "$ref": "#/$defs/cost"
+        },
+        "helpOffer": {
+          "$ref": "#/$defs/cost"
+        }
+      }
+    },
+    "zkCredits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "verifier": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "contract": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^eip155:\\d+:0x[0-9a-fA-F]{40}$"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit",
+        "amount"
+      ],
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "credits",
+            "token"
+          ]
+        },
+        "amount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "denom": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
