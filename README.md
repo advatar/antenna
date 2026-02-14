@@ -17,7 +17,8 @@ A formal, interoperability-focused specification + schema pack + deterministic t
 - `test-vectors/` — canonicalization + hashing + signature vectors
 - `python/` + `js/` — reference implementations for event IDs (and signatures in Python)
 - `rust/` — reference Rust crate (eventId + EIP-191/EIP-712 digests + signature recovery vectors)
-- `swift/` — reference Swift Package (eventId + EIP-191/EIP-712 digests)
+- `rust/antenna-relay/` — deployable relay/discovery server (gossip relay list + rendezvous replication + fallback-friendly publish endpoint)
+- `swift/` — reference Swift Package (eventId + EIP-191/EIP-712 digests + relay bootstrap/discovery client helpers)
 - `contracts/` — reference Solidity contracts (ZK credits escrow + verifier registry)
 - `prompts/` — a detailed lovable.dev build prompt
 - `bindings/` — A2A-over-P2P binding guidance
@@ -49,6 +50,25 @@ If two independent projects both:
 - verify the same signature vectors,
 
 …then you can start testing real network interoperability (topic naming, envelopes, relays, A2A help sessions).
+
+## Relay/discovery node
+
+Run a local relay node:
+
+```bash
+cargo run --manifest-path rust/antenna-relay/Cargo.toml -- \
+  --bind 127.0.0.1:7878 \
+  --public-url http://127.0.0.1:7878 \
+  --bootstrap https://relay-a.example.com,https://relay-b.example.com
+```
+
+Key endpoints:
+- `POST /` and `POST /v1/publish`
+- `GET /v1/events?topic=<topic>`
+- `GET /v1/discovery/relays`
+- `POST /v1/discovery/announce`
+- `GET /v1/discovery/rendezvous?topic=<topic>`
+- `GET /v1/health`
 
 ## License
 

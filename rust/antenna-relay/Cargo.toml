@@ -1,0 +1,20 @@
+[package]
+name = "antenna-relay"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Decentralized store-and-forward relay for MBP2P (Antenna) with gossip discovery and multi-relay fallback."
+
+[dependencies]
+anyhow = "1.0"
+antenna-protocol = { path = "../antenna-protocol" }
+axum = { version = "0.7", features = ["http1", "json", "query", "tokio"] }
+bytes = "1.7"
+clap = { version = "4.5", features = ["derive", "env"] }
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "signal", "time", "net"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
