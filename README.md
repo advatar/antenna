@@ -62,6 +62,15 @@ cargo run --manifest-path rust/antenna-relay/Cargo.toml -- \
   --bootstrap https://relay-a.example.com,https://relay-b.example.com
 ```
 
+Deploy to a remote host (build + systemd + routing):
+
+```bash
+./scripts/deploy-relay.sh \
+  --host 134.209.14.175 \
+  --user root \
+  --domain ground.zerok.cloud
+```
+
 Key endpoints:
 - `POST /` and `POST /v1/publish`
 - `GET /v1/events?topic=<topic>`

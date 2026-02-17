@@ -1,5 +1,8 @@
 # STATUS
 
+## 2026-02-17
+- [x] Add one-command relay deployment script for `ground.zerok.cloud` (SSH sync, remote build, systemd service, reverse proxy wiring).
+
 ## 2026-02-14
 - [x] Add decentralized relay + discovery implementation in Rust (deployable service with bootstrap list, gossip peer discovery, and relay fallback behavior).
 - [x] Add Swift `AntennaProtocol` relay client helpers for multi-relay bootstrap/discovery/fallback publishing.
