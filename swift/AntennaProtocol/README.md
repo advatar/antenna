@@ -36,6 +36,9 @@ let outcome = try await MBRelayClient.publishEnvelope(
 print(outcome.relayURL)
 ```
 
+`MBRelayClient` always appends the canonical relay `https://ground.zerok.cloud` to candidate lists,
+so clients keep at least one relay even when bootstrap inputs are empty or stale.
+
 ## Tests
 
 The test target includes eventId vectors aligned with the repository’s canonical vectors.

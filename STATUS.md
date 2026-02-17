@@ -2,6 +2,7 @@
 
 ## 2026-02-17
 - [x] Add one-command relay deployment script for `ground.zerok.cloud` (SSH sync, remote build, systemd service, reverse proxy wiring).
+- [x] Embed the canonical relay (`https://ground.zerok.cloud`) in client relay bootstrap so clients always have at least one relay candidate.
 
 ## 2026-02-14
 - [x] Add decentralized relay + discovery implementation in Rust (deployable service with bootstrap list, gossip peer discovery, and relay fallback behavior).

@@ -15,6 +15,18 @@ final class RelayClientTests: XCTestCase {
         XCTAssertTrue(normalized.contains(URL(string: "http://relay-two.example.com/v1/publish")!))
     }
 
+    func testRelayCandidatesAlwaysIncludeCanonicalRelay() throws {
+        let candidates = MBRelayClient.relayCandidatesWithCanonical([])
+        XCTAssertEqual(candidates, [URL(string: "https://ground.zerok.cloud")!])
+    }
+
+    func testRelayCandidatesWithCanonicalDedupesCanonicalInput() throws {
+        let candidates = MBRelayClient.relayCandidatesWithCanonical([
+            URL(string: "https://ground.zerok.cloud/")!
+        ])
+        XCTAssertEqual(candidates, [URL(string: "https://ground.zerok.cloud")!])
+    }
+
     func testPublishEndpointCandidatesIncludeFallbacks() throws {
         let root = URL(string: "https://relay.example.com")!
         let rootEndpoints = MBRelayClient.publishEndpointCandidates(for: root)

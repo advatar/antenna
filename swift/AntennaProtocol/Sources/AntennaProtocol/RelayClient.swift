@@ -32,11 +32,13 @@ private struct MBRelayListPayload: Decodable {
 }
 
 public enum MBRelayClient {
+    public static let canonicalRelayURL = URL(string: "https://ground.zerok.cloud")!
+
     public static func discoverRelays(
         seeds: [URL],
         requestTimeout: TimeInterval = 1.5
     ) async -> [URL] {
-        let normalizedSeeds = normalizeRelayURLs(seeds)
+        let normalizedSeeds = relayCandidatesWithCanonical(seeds)
         guard !normalizedSeeds.isEmpty else {
             return []
         }
@@ -72,11 +74,11 @@ public enum MBRelayClient {
         discover: Bool = true,
         requestTimeout: TimeInterval = 4.0
     ) async throws -> MBRelayPublishOutcome {
-        let seeds = normalizeRelayURLs([primaryRelay] + bootstrapRelays)
+        let seeds = relayCandidatesWithCanonical([primaryRelay] + bootstrapRelays)
         let relayCandidates: [URL]
         if discover {
             let discovered = await discoverRelays(seeds: seeds, requestTimeout: min(2.5, requestTimeout))
-            relayCandidates = normalizeRelayURLs(discovered + seeds)
+            relayCandidates = relayCandidatesWithCanonical(discovered + seeds)
         } else {
             relayCandidates = seeds
         }
@@ -92,7 +94,7 @@ public enum MBRelayClient {
         relayCandidates: [URL],
         requestTimeout: TimeInterval = 4.0
     ) async throws -> MBRelayPublishOutcome {
-        let candidates = normalizeRelayURLs(relayCandidates)
+        let candidates = relayCandidatesWithCanonical(relayCandidates)
         guard !candidates.isEmpty else {
             throw MBRelayClientError.noRelayCandidates
         }
@@ -135,6 +137,10 @@ public enum MBRelayClient {
         return mergedByKey
             .values
             .sorted { $0.absoluteString < $1.absoluteString }
+    }
+
+    static func relayCandidatesWithCanonical(_ urls: [URL]) -> [URL] {
+        normalizeRelayURLs(urls + [canonicalRelayURL])
     }
 
     static func publishEndpointCandidates(for relay: URL) -> [URL] {
