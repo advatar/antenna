@@ -2,7 +2,7 @@ import Foundation
 
 // MARK: - Core types
 
-public struct MBEnvelope: Codable {
+public struct MBEnvelope: Codable, Sendable {
     public var type: String
     public var topic: String
     public var event: MBEvent
@@ -14,7 +14,7 @@ public struct MBEnvelope: Codable {
     }
 }
 
-public struct MBAuthor: Codable {
+public struct MBAuthor: Codable, Sendable {
     public var type: String  // "erc8004" | "ens" | "anon"
     public var agentRegistry: String?
     public var agentId: Int?
@@ -30,7 +30,7 @@ public struct MBAuthor: Codable {
     }
 }
 
-public struct MBAuth: Codable {
+public struct MBAuth: Codable, Sendable {
     public var type: String   // "eip191" | "eip712" | "anonSig"
     public var payload: [String: CodableValue]
 
@@ -41,7 +41,7 @@ public struct MBAuth: Codable {
 }
 
 /// Antenna Part shape (stable for MBP2P events; do not assume A2A's evolving Part discriminators).
-public struct MBPart: Codable {
+public struct MBPart: Codable, Sendable {
     public var kind: String   // "text" | "file" | "data"
     public var text: String?
     public var url: String?
@@ -59,7 +59,7 @@ public struct MBPart: Codable {
     }
 }
 
-public struct MBEvent: Codable {
+public struct MBEvent: Codable, Sendable {
     public var type: String
     public var id: String?
     public var kind: String
@@ -140,7 +140,7 @@ public enum MBJSON {
 
 /// A minimal Codable wrapper for arbitrary JSON values.
 /// Used for `metadata`, `auth.payload`, and `part.data`.
-public enum CodableValue: Codable, Equatable {
+public enum CodableValue: Codable, Equatable, Sendable {
     case null
     case bool(Bool)
     case int(Int64)

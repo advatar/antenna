@@ -8,6 +8,8 @@ Reference Swift implementation of the **MBP2P** protocol primitives for iOS/macO
 - Topic naming helpers (`mb/v1/cat/...`, `mb/v1/help/...`)
 - EIP-191 and EIP-712 digest builders (wallet signing integration points)
 - Relay bootstrap/discovery/fallback publishing helpers (`MBRelayClient`)
+- Relay topic fetch + polling subscribe helpers (`MBRelayClient`)
+- Content-addressed fetch helpers with SHA-256 verification (`MBRelayClient`)
 
 > **Note:** This package does **not** ship a full Ethereum wallet stack. It outputs the exact bytes/digests
 > you need to sign with your preferred signer (local key, Secure Enclave-backed key, WalletConnect, etc.)
@@ -34,6 +36,48 @@ let outcome = try await MBRelayClient.publishEnvelope(
   discover: true
 )
 print(outcome.relayURL)
+```
+
+Fetch topic events from relay candidates:
+
+```swift
+let events = try await MBRelayClient.fetchTopicEvents(
+  topic: "mb/v1/help/ai.antenna.eth",
+  primaryRelay: URL(string: "https://relay-primary.example.com")!,
+  bootstrapRelays: []
+)
+for event in events {
+  print(event.receivedAtMilliseconds, event.envelope.topic)
+}
+```
+
+Polling subscribe with cancellation:
+
+```swift
+let sub = try await MBRelayClient.subscribeToTopic(
+  topic: "mb/v1/help/ai.antenna.eth",
+  primaryRelay: URL(string: "https://relay-primary.example.com")!,
+  bootstrapRelays: [],
+  onEvent: { stored in
+    print("event:", stored.envelope.event.id ?? "no-id")
+  }
+)
+
+// Later:
+await sub.cancel()
+```
+
+Content-addressed fetch with digest verification:
+
+```swift
+let bytes = try await MBRelayClient.fetchContentAddressed(
+  sha256Hex: "2f2c...<64-hex>...",
+  contentURLCandidates: [
+    URL(string: "https://cdn.example.com/artifact.bin")!,
+    URL(string: "https://mirror.example.com/artifact.bin")!
+  ]
+)
+print(bytes.count)
 ```
 
 `MBRelayClient` always appends the canonical relay `https://ground.zerok.cloud` to candidate lists,

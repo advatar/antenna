@@ -10,6 +10,9 @@ Core deliverables:
 - RFC8785-style canonicalization (restricted)
 - `eventId` computation
 - Keccak-256 + EIP-191 + EIP-712 digest builders
+- Relay publish/discovery helpers
+- Relay topic event fetch + polling subscribe helpers
+- Content-addressed fetch helpers with SHA-256 verification
 - test vectors
 
 Integrators should combine this package with:

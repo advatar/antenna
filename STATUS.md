@@ -1,5 +1,8 @@
 # STATUS
 
+## 2026-02-18
+- [x] Add Swift `AntennaProtocol` relay client support for topic event fetch + polling subscribe + SHA-256 verified content-addressed fetch helpers.
+
 ## 2026-02-17
 - [x] Add one-command relay deployment script for `ground.zerok.cloud` (SSH sync, remote build, systemd service, reverse proxy wiring).
 - [x] Embed the canonical relay (`https://ground.zerok.cloud`) in client relay bootstrap so clients always have at least one relay candidate.
